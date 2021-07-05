@@ -11,3 +11,4 @@ export class ClassComp1  extends React.Component{
     }
 }
 // export default ClassComp;
+
