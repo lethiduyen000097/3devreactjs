@@ -1,21 +1,27 @@
 import React from "react";
+import Header from "./Components/Header.component";
+import Menu from "./Components/Menu.component";
+import Footer from "./Components/Footer.component";
 //import logo from './logo.svg';
 //import './App.css';
-import FC from "./Components/FunctionalComp";
-import { ClassComp, ClassComp1 } from "./Components/ClassComp";
-import Click from "./Components/Click";
-import Counter from "./Components/Counter";
-import ParentComp from "./Components/ParentComp";
-import ContainedButtons from "./Components/Button";
-import ButtonTestFn from "./Components/ButtonTest";
-import Footer2 from "./Components/footer2.component";
+// import FC from "./Components/FunctionalComp";
+// import { ClassComp, ClassComp1 } from "./Components/ClassComp";
+// import Click from "./Components/Click";
+// import Counter from "./Components/Counter";
+// import ParentComp from "./Components/ParentComp";
+// import ContainedButtons from "./Components/Button";
+// import ButtonTestFn from "./Components/ButtonTest";
+// import Footer2 from "./Components/footer2.component";
 
-import Header from "./Components/Head";
+// import Header from "./Components/Head";
 
 function App() {
   return (
     <div>
         <h1>Hello</h1>
+        <Header />
+        <Menu />
+        <Footer />
         {/* <p>10 am 06/07/2021</p>
         <Header />
 
