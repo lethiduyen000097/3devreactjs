@@ -7,11 +7,14 @@ import React from "react";
 // import ButtonTestFn from "./components/ButtonTest";
 // import FixedContainer from "./components/Container";
 import Customers from "./components/customers.component";
+import EnhancedTable from "./components/customers.component1";
 
 
 function App() {
   return (
     <div>
+      {/* <EnhancedTable /> */}
+      <EnhancedTable />
       <Customers />
       
       {/* <FixedContainer /> */}
