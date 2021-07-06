@@ -16,18 +16,11 @@ const ButtonTestFn = () => {
     return (
       
     <div className={classes.root}>
-      <Button variant="contained">Trạng thái</Button>
       <Button variant="contained" color="primary">
-        Lưu
-      </Button>
-      <Button variant="contained" color="secondary">
-        Hủy
+        Enable
       </Button>
       <Button variant="contained" disabled>
-        Xem chi tiết
-      </Button>
-      <Button variant="contained" color="primary" href="#contained-buttons">
-        Duyệt
+        Disable
       </Button>
     </div>
   );
