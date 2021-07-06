@@ -10,10 +10,15 @@ import ContainedButtons from "./Components/Button";
 import ButtonTestFn from "./Components/ButtonTest";
 import Footer2 from "./Components/footer2.component";
 
+import Header from "./Components/Head";
+
 function App() {
   return (
     <div>
         <h1>Hello</h1>
+        {/* <p>10 am 06/07/2021</p>
+        <Header />
+
         <p>9 am 05/07/2021</p>
         <p> Viết component sử dụng Function(ưu tiên) và Class; import, export các Component trong app mới tạo. </p>
           <FC />
@@ -27,7 +32,7 @@ function App() {
           <p>Viết hàm kiểu const = () => ...;</p>
           <p>Sử dụng Materrial UI cho Button</p> 
           <ButtonTestFn />
-          <Footer2 />
+          <Footer2 /> */}
     </div>
     );
 }
