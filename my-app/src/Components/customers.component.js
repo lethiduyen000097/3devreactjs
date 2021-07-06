@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, Button } from '@material-ui/core';
+import { makeStyles, TableContainer, Checkbox, Table, TableHead, TableBody, TableRow, TableCell, Paper, Button } from '@material-ui/core';
 
 const useStyles = makeStyles({
     table: {
@@ -78,7 +78,12 @@ const Customers = () => {
               <TableCell align="center">{row.tip_code}</TableCell>
               <TableCell align="center">{row.code}</TableCell>
               <TableCell align="center">{row.address}</TableCell>
-              <TableCell align="center">{row.status}</TableCell>
+              <TableCell padding="checkbox" align="center">
+                <Checkbox
+                          // checked={isItemSelected}
+                          // inputProps={{ 'aria-labelledby': labelId }}
+                        />
+                </TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -6,15 +6,15 @@ import React from "react";
 // import Input from "./components/Input.component";
 // import ButtonTestFn from "./components/ButtonTest";
 // import FixedContainer from "./components/Container";
-import Customers from "./components/customers.component";
-import EnhancedTable from "./components/customers.component1";
 
+// import EnhancedTable from "./components/customers.component1";
+import Customers from "./components/customers.component";
 
 function App() {
   return (
     <div>
       {/* <EnhancedTable /> */}
-      <EnhancedTable />
+      {/* <EnhancedTable /> */}
       <Customers />
       
       {/* <FixedContainer /> */}
