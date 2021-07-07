@@ -1,59 +1,48 @@
 import React from 'react';
 import { makeStyles, TableContainer, Checkbox, Table, TableHead, TableBody, TableRow, TableCell, Paper, Button } from '@material-ui/core';
 
-const useStyles = makeStyles({
-    table: {
-      minWidth: 650,
-    },
-});
-
-const useStylesBt = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
             margin: theme.spacing(1),
         },
     },
+    table: {
+      minWidth: 650,
+    },
 }));
 
-
-const ButtonTestFn = () => {
-
-    const classes = useStylesBt();
-
-    return (
-      
-    <div className={classes.root}>
-      <Button variant="contained" color="primary">
-        Enable
-      </Button>
-      <Button variant="contained" disabled>
-        Disable
-      </Button>
-    </div>
-  );
-}
-
-function createCus(id, name, short_name, tip_code, code, address, status) {
-return { id, name, short_name, tip_code, code, address, status };
-}
-
+// Sample JSON return from backend
 const rows = [
-    createCus(1 , 'Ruly Subin', 'Subin', 24, 20, '123 Stress, HN, VN', ),
-    createCus(2 , 'Ruly No', 'No', 24, 20, '123 Stress, HN, VN', ),
-    createCus(3 , 'Han Subin', 'Subin', 29, 20, '129 Stress, HN, VN', ),
-    createCus(4 , 'Secsi Subin', 'Subin', 24, 20, '123 Stress, HN, VN', ),
-    createCus(5 , 'Numi Subin', 'Subin', 20, 20, '923 Stress, HN, VN', ),
-    createCus(6 , 'Ruly Jame', 'Jame', 24, 20, '13 Stress, HN, VN', ),
-    createCus(7 , 'Ruly Jock', 'Jock', 24, 290, '120 Stress, HN, VN', ),
+  { id: 1, name: 'ABC', short_name: 'ADFD', tax_code: 123456, code: 'dfsg', address: 'dfdghjkl', status: true}
   ];
+// End sample JSON
+
 
 const Customers = () => {
     const classes = useStyles();
+    
+    //render Group Buttons for Component 
+    const _renderGroupButtons = () => {
+
+      return (
+        
+      <div className={classes.root}>
+        <Button variant="contained" color="primary">
+          Enable
+        </Button>
+        <Button variant="contained" disabled>
+          Disable
+        </Button>
+      </div>
+    );
+  }
+  // End function render Group Buttons
+
+  // render Table to display invoices
+  const _renderCustomerTable = () => {
     return (
-        <div>
-            <h5>Customer table</h5>
-            <div style={{ height: 400, width: '100%' }}>
-            <TableContainer component={Paper}>
+      <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -75,7 +64,7 @@ const Customers = () => {
               <TableCell align="center">{row.id}</TableCell>
               <TableCell align="center">{row.name}</TableCell>
               <TableCell align="center">{row.short_name}</TableCell>
-              <TableCell align="center">{row.tip_code}</TableCell>
+              <TableCell align="center">{row.tax_code}</TableCell>
               <TableCell align="center">{row.code}</TableCell>
               <TableCell align="center">{row.address}</TableCell>
               <TableCell padding="checkbox" align="center">
@@ -89,7 +78,18 @@ const Customers = () => {
         </TableBody>
       </Table>
     </TableContainer>
-    <ButtonTestFn />
+    )
+  }
+  // End render Table 
+
+  // Main Render
+    return (
+        <div>
+            <h5>Customer table</h5>
+            <div style={{ height: 400, width: '100%' }}>
+             {_renderGroupButtons()}
+              {_renderCustomerTable()}
+            
             </div>
 
         </div>

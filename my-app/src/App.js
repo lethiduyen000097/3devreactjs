@@ -8,7 +8,7 @@ import React from "react";
 // import FixedContainer from "./components/Container";
 
 // import EnhancedTable from "./components/customers.component1";
-import Customers from "./components/customers.component";
+import Customers from "./Components/customers.component";
 
 function App() {
   return (
