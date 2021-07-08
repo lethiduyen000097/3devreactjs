@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TablePagination from '@material-ui/core/TablePagination';
 import { makeStyles, TableContainer, Switch, FormControlLabel, Checkbox, Table, TableHead, TableBody, TableRow, TableCell, Paper, Button } from '@material-ui/core';
 
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 // Sample JSON return from backend
 const apiCustomers = [
-  { id: 1, name: 'ABC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'dfdghjkl', status: true},
+  { id: 1, name: 'ABC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'dfdghjkl', status: false},
   { id: 2, name: 'AcC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'sdsdsfdghjkl', status: false},
   { id: 3, name: 'ABb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'dhjkl', status: true},
   { id: 4, name: 'AwC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'dfdghjkl', status: true},
@@ -42,6 +42,19 @@ const Customers = () => {
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [dense, setDense] = React.useState(false);
 
+    const [customers, setCustomers] = useState([])
+
+    useEffect(function effectFunction(){
+      console.log(apiCustomers)
+      if (apiCustomers) {
+        setCustomers(apiCustomers)
+      }
+      console.log('State Customer', customers)
+    }, [customers]) 
+
+
+
+
     const handleClick = (event, name) => {
       const selectedIndex = selected.indexOf(name);
       let newSelected = [];
@@ -61,6 +74,23 @@ const Customers = () => {
 
       setSelected(newSelected);
     };
+    const handleCheckBoxClick = (row) => {
+      console.log(row)
+      let newCustomers = customers.map((el, index)=>(
+        el.id !== row.id? el: {...el, status: !el.status}
+      ))
+      console.log('New Customer State', newCustomers)
+    }
+
+//
+
+    // const handleClickDisable = (newSelected) => {
+
+    // }
+    // ;
+    // const handleClickEnable = (event, name) => {
+
+    // };
 
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
@@ -83,12 +113,15 @@ const Customers = () => {
         <Button 
           variant="contained" 
           color="primary" 
+          // onClick={() => setSelected(newSelected)}
+          // onClick={(event) => handleClickEnable(event, apiCustomers.name)}
         >
           Enable
         </Button>
         <Button 
         variant="contained"
         disabled
+        // onClick={(event) => handleClickDisable(event, apiCustomers.name)}
         >
           Disable
         </Button>
@@ -124,28 +157,29 @@ const Customers = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {apiCustomers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((apiCustomers, index) => {
-                const isItemSelected = isSelected(apiCustomers.name);
+              {customers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+                const isItemSelected = isSelected(row.name);
                 const labelId = `enhanced-table-checkbox-${index}`;
                 return (  
                   <TableRow 
                     hover
-                    onClick={(event) => handleClick(event, apiCustomers.name)}
+                    // onClick={(event) => handleClick(event, row.name)}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={apiCustomers.name}
+                    key={row.id}
                     selected={isItemSelected}
                   >
-                    <TableCell align="center">{apiCustomers.id}</TableCell>
-                    <TableCell align="center">{apiCustomers.name}</TableCell>
-                    <TableCell align="center">{apiCustomers.short_name}</TableCell>
-                    <TableCell align="center">{apiCustomers.tax_code}</TableCell>
-                    <TableCell align="center">{apiCustomers.code}</TableCell>
-                    <TableCell align="center">{apiCustomers.address}</TableCell>
+                    <TableCell align="center">{row.id}</TableCell>
+                    <TableCell align="center">{row.name}</TableCell>
+                    <TableCell align="center">{row.short_name}</TableCell>
+                    <TableCell align="center">{row.tax_code}</TableCell>
+                    <TableCell align="center">{row.code}</TableCell>
+                    <TableCell align="center">{row.address}</TableCell>
                     <TableCell padding="checkbox" align="center">
                       <Checkbox
-                        checked={isItemSelected}
+                        checked={row.status}
+                        onClick={handleCheckBoxClick.bind(this, row)}
                         inputProps={{ 'aria-labelledby': labelId }}
                       />
                     </TableCell>
