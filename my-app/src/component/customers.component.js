@@ -50,35 +50,18 @@ const Customers = () => {
         setCustomers(apiCustomers)
       }
       console.log('State Customer', customers)
-    }, [customers]) 
+    }, []) 
 
 
 
 
-    const handleClick = (event, name) => {
-      const selectedIndex = selected.indexOf(name);
-      let newSelected = [];
 
-      if (selectedIndex === -1) {
-        newSelected = newSelected.concat(selected, name);
-      } else if (selectedIndex === 0) {
-        newSelected = newSelected.concat(selected.slice(1));
-      } else if (selectedIndex === selected.length - 1) {
-        newSelected = newSelected.concat(selected.slice(0, -1));
-      } else if (selectedIndex > 0) {
-        newSelected = newSelected.concat(
-          selected.slice(0, selectedIndex),
-          selected.slice(selectedIndex + 1),
-        );
-      }
-
-      setSelected(newSelected);
-    };
     const handleCheckBoxClick = (row) => {
       console.log(row)
       let newCustomers = customers.map((el, index)=>(
         el.id !== row.id? el: {...el, status: !el.status}
       ))
+      setCustomers(newCustomers)
       console.log('New Customer State', newCustomers)
     }
 
