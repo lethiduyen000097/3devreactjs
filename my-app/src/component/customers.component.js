@@ -25,11 +25,39 @@ const Customers = () => {
     const classes = useStyles();
 
     const [customers, setCustomer] = useState(null);
+    const [selected, setSelected] = React.useState([]);
+
 
     const handleClickCheckboxInRow = (row) =>{
-      console.log(row)
+
+      console.log(row);
+
+     
     }
-    
+
+    const handleClick = (event, name) => {
+      const selectedIndex = selected.indexOf(name);
+      let newSelected = [];
+
+      if (selectedIndex === -1) {
+        newSelected = newSelected.concat(selected, name);
+      } else if (selectedIndex === 0) {
+        newSelected = newSelected.concat(selected.slice(1));
+      } else if (selectedIndex === selected.length - 1) {
+        newSelected = newSelected.concat(selected.slice(0, -1));
+      } else if (selectedIndex > 0) {
+        newSelected = newSelected.concat(
+          selected.slice(0, selectedIndex),
+          selected.slice(selectedIndex + 1),
+        );
+      }
+
+      setSelected(newSelected);
+    };
+
+
+
+ 
     //render Group Buttons for Component 
     const _renderGroupButtons = () => {
 
@@ -38,11 +66,12 @@ const Customers = () => {
         <Button 
           variant="contained" 
           color="primary" 
-          onClick={() => setCustomer(customers - 1)}
         >
           Enable
         </Button>
-        <Button variant="contained" disabled>
+        <Button 
+        variant="contained"
+        >
           Disable
         </Button>
       </div>
@@ -50,6 +79,8 @@ const Customers = () => {
   }
   // End function render Group Buttons
 
+
+  const isSelected = (name) => selected.indexOf(name) !== -1;
   // render Table to display invoices
   const _renderCustomerTable = () => {
     return (
@@ -67,8 +98,24 @@ const Customers = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {apiCustomers.map((apiCustomers) => (
-            <TableRow key={apiCustomers.name}>
+          {apiCustomers.map((apiCustomers, index) => {
+            const isItemSelected = isSelected(apiCustomers.name);
+            const labelId = `enhanced-table-checkbox-${index}`;
+            return (
+<TableRow 
+            hover
+            onClick={(event) => handleClick(event, apiCustomers.name)}
+            role="checkbox"
+            aria-checked={isItemSelected}
+            tabIndex={-1}
+            key={apiCustomers.name}
+            selected={isItemSelected}
+
+            // key={apiCustomers.name}
+            // role="checkbox"
+            // onClick={(event) => handleClick(event, apiCustomers.name)}
+
+            >
               <TableCell align="center">{apiCustomers.id}</TableCell>
               <TableCell align="center">{apiCustomers.name}</TableCell>
               <TableCell align="center">{apiCustomers.short_name}</TableCell>
@@ -77,15 +124,20 @@ const Customers = () => {
               <TableCell align="center">{apiCustomers.address}</TableCell>
               <TableCell padding="checkbox" align="center">
                 <Checkbox
-                  checked={apiCustomers.status}
-                  onClick = {handleClickCheckboxInRow.bind(this, apiCustomers)}
+                  checked={isItemSelected}
+                  inputProps={{ 'aria-labelledby': labelId }}
+                  // checked={apiCustomers.status}
+                  // onClick = {handleClickCheckboxInRow.bind(this, apiCustomers)}
                 />
                 </TableCell>
             </TableRow>
-          ))}
+            );
+            
+})}
         </TableBody>
       </Table>
     </TableContainer>
+    
     )
   }
   // End render Table 
