@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, Button, TextField } from '@material-ui/core';
+import { makeStyles, Button, TextField, Snackbar} from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,8 +11,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const _createInputCustomer = () => {
     const classes = useStyles();
+
+    const [open, setOpen] = React.useState(false);
+
+    
+const handleClick = () => {
+    setOpen(true);
+  };
+
+//   const handleClose = (event, reason) => {
+//     if (reason === 'clickaway') {
+//       return;
+//     }
+
+//     setOpen(false);
+//   };
 
     return (
       <form className={classes.root} noValidate autoComplete="off">
@@ -41,9 +58,15 @@ const _createInputCustomer = () => {
           </Button>
           <Button 
           variant="contained"
+        //   onClick={handleClick}
           >
             Hủy
           </Button>
+          {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+        Bạn có chắc muốn xóa!
+        </Alert>
+      </Snackbar> */}
         </div>
       );
     }

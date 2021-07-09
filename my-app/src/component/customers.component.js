@@ -19,17 +19,7 @@ const apiCustomers = [
   { id: 2, name: 'AcC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'sdsdsfdghjkl', status: false},
   { id: 3, name: 'ABb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'dhjkl', status: true},
   { id: 4, name: 'AwC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'dfdghjkl', status: true},
-  { id: 5, name: 'ArC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'sdsdsfdghjkl', status: false},
-  { id: 6, name: 'Arb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'dhjkl', status: true},
-  { id: 7, name: 'AyC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'dfdghjkl', status: true},
-  { id: 8, name: 'AuC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'sdsdsfdghjkl', status: false},
-  { id: 9, name: 'Aib', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'dhjkl', status: true},
-  { id: 10, name: 'AvC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'dfdghjkl', status: true},
-  { id: 11, name: 'AbC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'sdsdsfdghjkl', status: false},
-  { id: 12, name: 'Anb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'dhjkl', status: true},
-  { id: 13, name: 'AmC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'dfdghjkl', status: true},
-  { id: 14, name: 'AqC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'sdsdsfdghjkl', status: false},
-  { id: 15, name: 'Alb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'dhjkl', status: true}
+
   ];
 // End sample JSON
 
@@ -42,7 +32,8 @@ const Customers = () => {
     const [dense, setDense] = React.useState(false);
     const [selected, setSelected] = React.useState([]);
 
-    const [customers, setCustomers] = useState([])
+    const [customers, setCustomers] = useState([]);
+    const [newCustomers, setStatusCustomers] = useState([])
 
     useEffect(function effectFunction(){
       console.log(apiCustomers)
@@ -53,31 +44,60 @@ const Customers = () => {
     }, []) 
 
     const handleCheckBoxClick = (row) => {
-      console.log(row)
+      // console.log(row)
       let newCustomers = customers.map((el, index)=>(
         el.id !== row.id? el: {...el, status: !el.status}
       ))
       setCustomers(newCustomers)
-      console.log(row)
-
+      console.log(customers)
+      console.log(newCustomers)
     }
+
+    const handleClick = (event, name) => {
+      const selectedIndex = selected.indexOf(name);
+      let newSelected = [];
+  
+      if (selectedIndex === -1) {
+        newSelected = newSelected.concat(selected, name);
+      } else if (selectedIndex === 0) {
+        newSelected = newSelected.concat(selected.slice(1));
+      } else if (selectedIndex === selected.length - 1) {
+        newSelected = newSelected.concat(selected.slice(0, -1));
+      } else if (selectedIndex > 0) {
+        newSelected = newSelected.concat(
+          selected.slice(0, selectedIndex),
+          selected.slice(selectedIndex + 1),
+        );
+      }
+  
+      setSelected(newSelected);
+
+      console.log('nono', newSelected)
+    };
     
     const EnableClick = (row) => {
-      console.log('row change status',{handleCheckBoxClick} )
+      console.log(customers)
+     let newStatusCustomers = customers.map((el, index)=>(
+       el.id !== row.id? el: {...el}
+      
+     ))
+     setStatusCustomers(newStatusCustomers)
+      
+      // console.log(newCustomers)
     }
 
-    const handleChangePage = (event, newPage) => {
-      setPage(newPage);
-    };
+    // const handleChangePage = (event, newPage) => {
+    //   setPage(newPage);
+    // };
 
-    const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(parseInt(event.target.value, 10));
-      setPage(0);
-    };
+    // const handleChangeRowsPerPage = (event) => {
+    //   setRowsPerPage(parseInt(event.target.value, 10));
+    //   setPage(0);
+    // };
 
-    const handleChangeDense = (event) => {
-      setDense(event.target.checked);
-    };
+    // const handleChangeDense = (event) => {
+    //   setDense(event.target.checked);
+    // };
 
     //render Group Buttons for Component 
     const _renderGroupButtons = () => {
@@ -94,7 +114,8 @@ const Customers = () => {
         </Button>
         <Button 
         variant="contained"
-        disabled
+        
+        onClick={handleClick}
         // onClick={(event) => handleClickDisable(event, apiCustomers.name)}
         >
           Disable
@@ -137,7 +158,7 @@ const Customers = () => {
                 return (  
                   <TableRow 
                     hover
-                    // onClick={(event) => handleClick(event, row.name)}
+                    onClick={(event) => handleClick(event, row.id)}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
