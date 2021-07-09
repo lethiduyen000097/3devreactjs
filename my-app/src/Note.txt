@@ -1,0 +1,2 @@
+Note 
+If you use this optimization, make sure the array includes all values from the component scope (such as props and state) that change over time and that are used by the effect. Otherwise, your code will reference state values from previous ren

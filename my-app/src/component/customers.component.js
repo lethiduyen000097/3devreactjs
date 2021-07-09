@@ -37,10 +37,11 @@ const apiCustomers = [
 const Customers = () => {
     const classes = useStyles();
 
-    const [selected, setSelected] = React.useState([]);
+    // const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [dense, setDense] = React.useState(false);
+    const [selected, setSelected] = React.useState([]);
 
     const [customers, setCustomers] = useState([])
 
@@ -52,28 +53,19 @@ const Customers = () => {
       console.log('State Customer', customers)
     }, []) 
 
-
-
-
-
     const handleCheckBoxClick = (row) => {
       console.log(row)
       let newCustomers = customers.map((el, index)=>(
         el.id !== row.id? el: {...el, status: !el.status}
       ))
       setCustomers(newCustomers)
-      console.log('New Customer State', newCustomers)
+      console.log(row)
+
     }
-
-//
-
-    // const handleClickDisable = (newSelected) => {
-
-    // }
-    // ;
-    // const handleClickEnable = (event, name) => {
-
-    // };
+    
+    const EnableClick = (row) => {
+      console.log('row change status',{handleCheckBoxClick} )
+    }
 
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
@@ -96,7 +88,7 @@ const Customers = () => {
         <Button 
           variant="contained" 
           color="primary" 
-          // onClick={() => setSelected(newSelected)}
+          onClick={EnableClick}
           // onClick={(event) => handleClickEnable(event, apiCustomers.name)}
         >
           Enable
@@ -141,7 +133,7 @@ const Customers = () => {
             </TableHead>
             <TableBody>
               {customers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
-                const isItemSelected = isSelected(row.name);
+                const isItemSelected = isSelected(row.id);
                 const labelId = `enhanced-table-checkbox-${index}`;
                 return (  
                   <TableRow 
@@ -162,6 +154,7 @@ const Customers = () => {
                     <TableCell padding="checkbox" align="center">
                       <Checkbox
                         checked={row.status}
+                        // checked={isItemSelected}
                         onClick={handleCheckBoxClick.bind(this, row)}
                         inputProps={{ 'aria-labelledby': labelId }}
                       />
@@ -177,7 +170,7 @@ const Customers = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
+        {/* <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={apiCustomers.length}
@@ -185,12 +178,12 @@ const Customers = () => {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+        /> */}
       </Paper>
-      <FormControlLabel
+      {/* <FormControlLabel
       control={<Switch checked={dense} onChange={handleChangeDense} />}
       label="Dense padding"
-    />
+    /> */}
     </div>
   )
 }
