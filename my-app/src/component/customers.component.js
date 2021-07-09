@@ -28,12 +28,12 @@ const Customers = () => {
 
     // const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
     const [dense, setDense] = React.useState(false);
     const [selected, setSelected] = React.useState([]);
 
     const [customers, setCustomers] = useState([]);
-    const [newCustomers, setStatusCustomers] = useState([])
+    // const [newCustomers, setStatusCustomers] = useState([])
 
     useEffect(function effectFunction(){
       console.log(apiCustomers)
@@ -52,13 +52,16 @@ const Customers = () => {
       console.log(customers)
       console.log(newCustomers)
     }
+    const handleBtnDisableClick = () => {
+      console.log(selected)
+    }
 
-    const handleClick = (event, name) => {
-      const selectedIndex = selected.indexOf(name);
+    const handleClick = (event, id) => {
+      const selectedIndex = selected.indexOf(id);
       let newSelected = [];
   
       if (selectedIndex === -1) {
-        newSelected = newSelected.concat(selected, name);
+        newSelected = newSelected.concat(selected, id);
       } else if (selectedIndex === 0) {
         newSelected = newSelected.concat(selected.slice(1));
       } else if (selectedIndex === selected.length - 1) {
@@ -69,9 +72,7 @@ const Customers = () => {
           selected.slice(selectedIndex + 1),
         );
       }
-  
       setSelected(newSelected);
-
       console.log('nono', newSelected)
     };
     
@@ -81,7 +82,7 @@ const Customers = () => {
        el.id !== row.id? el: {...el}
       
      ))
-     setStatusCustomers(newStatusCustomers)
+    //  setStatusCustomers(newStatusCustomers)
       
       // console.log(newCustomers)
     }
@@ -115,7 +116,7 @@ const Customers = () => {
         <Button 
         variant="contained"
         
-        onClick={handleClick}
+        onClick={handleBtnDisableClick}
         // onClick={(event) => handleClickDisable(event, apiCustomers.name)}
         >
           Disable
