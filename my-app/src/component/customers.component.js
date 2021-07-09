@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import TablePagination from '@material-ui/core/TablePagination';
 import { makeStyles, TableContainer, Switch, FormControlLabel, Checkbox, Table, TableHead, TableBody, TableRow, TableCell, Paper, Button } from '@material-ui/core';
 
 
