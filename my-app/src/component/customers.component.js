@@ -184,7 +184,7 @@ const Customers = () => {
               })}
               {emptyRows > 0 && (
                     <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                      <TableCell colSpan={6} />
+                      <TableCell colSpan={7}>Không có dữ liệu</TableCell>
                     </TableRow>
               )}
             </TableBody>
