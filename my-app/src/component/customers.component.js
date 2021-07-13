@@ -47,7 +47,7 @@ const apiCustomers = [
 const Customers = () => {
     const classes = useStyles();
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(15);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
     const [dense, setDense] = useState(false);
     const [selected, setSelected] = useState([]);
     const [customers, setCustomers] = useState([]);
@@ -167,11 +167,11 @@ const Customers = () => {
                     selected={isItemSelected}
                   >
                     <TableCell align="center" width="5%">{row.id}</TableCell>
-                    <TableCell align="center" width="15%">{row.name}</TableCell>
-                    <TableCell align="center" width="10%" >{row.short_name}</TableCell>
+                    <TableCell width="15%">{row.name}</TableCell>
+                    <TableCell width="10%" >{row.short_name}</TableCell>
                     <TableCell align="center" width="10%">{row.tax_code}</TableCell>
                     <TableCell align="center" width="10%">{row.code}</TableCell>
-                    <TableCell align="center" width="40%">{row.address}</TableCell>
+                    <TableCell width="40%">{row.address}</TableCell>
                     <TableCell padding="checkbox" align="center" width="10%">
                       <Checkbox
                         checked={row.status}

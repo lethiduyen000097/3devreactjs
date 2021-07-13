@@ -7,6 +7,11 @@ import {
 } from "react-router-dom";
 
 import Customers from "./component/customers.component";
+import CreateUser from "./component/users.component";
+import HomeBay from "./component/home.component";
+// import MenuHome from "./component/menuHome.component";
+import NavTabs from "./component/navTb.component";
+
 
 
 export default function App() {
@@ -16,13 +21,16 @@ export default function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/home">Home</Link>
             </li>
             <li>
               <Link to="/customers">Customer</Link>
             </li>
             <li>
               <Link to="/users">Users</Link>
+            </li>
+            <li>
+              <Link to="/test">Test</Link>
             </li>
           </ul>
         </nav>
@@ -34,25 +42,19 @@ export default function App() {
             <Customers />
           </Route>
           <Route path="/users">
-            <Users />
+            <CreateUser />
+          </Route>
+          <Route path="/test">
+            {/* <MenuHome /> */}
+            <NavTabs />
           </Route>
           <Route path="/">
-            <Home />
+            <HomeBay />
           </Route>
+          
         </Switch>
       </div>
     </Router>
   );
 }
 
-function Home() {
-  return <h2>Home</h2>;
-}
-
-// function About() {
-//   return <h2>About</h2>;
-// }
-
-function Users() {
-  return <h2>Users</h2>;
-}
