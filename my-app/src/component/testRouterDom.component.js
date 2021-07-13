@@ -6,9 +6,6 @@ import {
   Link
 } from "react-router-dom";
 
-import Customers from "./component/customers.component";
-
-
 export default function App() {
   return (
     <Router>
@@ -19,7 +16,7 @@ export default function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/customers">Customer</Link>
+              <Link to="/about">About</Link>
             </li>
             <li>
               <Link to="/users">Users</Link>
@@ -30,8 +27,8 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/customers">
-            <Customers />
+          <Route path="/about">
+            <About />
           </Route>
           <Route path="/users">
             <Users />
@@ -49,9 +46,9 @@ function Home() {
   return <h2>Home</h2>;
 }
 
-// function About() {
-//   return <h2>About</h2>;
-// }
+function About() {
+  return <h2>About</h2>;
+}
 
 function Users() {
   return <h2>Users</h2>;

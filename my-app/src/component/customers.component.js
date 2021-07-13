@@ -167,12 +167,12 @@ const Customers = () => {
                     selected={isItemSelected}
                   >
                     <TableCell align="center" width="5%">{row.id}</TableCell>
-                    <TableCell align="center" width="20%">{row.name}</TableCell>
+                    <TableCell align="center" width="15%">{row.name}</TableCell>
                     <TableCell align="center" width="10%" >{row.short_name}</TableCell>
                     <TableCell align="center" width="10%">{row.tax_code}</TableCell>
                     <TableCell align="center" width="10%">{row.code}</TableCell>
                     <TableCell align="center" width="40%">{row.address}</TableCell>
-                    <TableCell padding="checkbox" align="center" width="5%">
+                    <TableCell padding="checkbox" align="center" width="10%">
                       <Checkbox
                         checked={row.status}
                         onClick={handleCheckBoxClick.bind(this, row)}
@@ -184,7 +184,7 @@ const Customers = () => {
               })}
               {emptyRows > 0 && (
                     <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                      <TableCell colSpan={7}>Không có dữ liệu</TableCell>
+                      <TableCell colSpan={7} />
                     </TableRow>
               )}
             </TableBody>
