@@ -1,5 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, TableContainer, Switch, FormControlLabel, Checkbox, Table, TableHead, TableBody, TableRow, TableCell, Paper, Button } from '@material-ui/core';
+import { 
+  makeStyles, 
+  TableContainer, 
+  Switch, 
+  FormControlLabel, 
+  Checkbox, 
+  Table, 
+  TableHead, 
+  TableBody, 
+  TableRow, 
+  TableCell, 
+  Paper, 
+  Button,
+  TablePagination
+ } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -15,10 +29,18 @@ const useStyles = makeStyles((theme) => ({
 
 // Sample JSON return from backend
 const apiCustomers = [
-  { id: 1, name: 'ABC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay Nội Bài', status: false},
+  { id: 1, name: 'ABC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Nội Bài – TP. Hà Nội (VVNB/HAN)', status: false},
   { id: 2, name: 'AcC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'Sân bay quốc tế Cát Bi – Hải Phòng', status: false},
   { id: 3, name: 'ABb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'Sân bay quốc tế Phú Bài – Huế (VVPB/HUI)', status: true},
   { id: 4, name: 'AwC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Cam Ranh – Khánh Hòa (VVCR/CXR)', status: true},
+  { id: 5, name: 'ABC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Đà Nẵng – TP. Đà Nẵng (VVDN/DAD)', status: false},
+  { id: 6, name: 'AcC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'Sân bay quốc tế Cam Ranh – Khánh Hòa (VVCR/CXR)', status: false},
+  { id: 7, name: 'ABb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'Sân bay quốc tế Tân Sơn Nhất – TP.HCM (VVTS/SGN)', status: true},
+  { id: 8, name: 'AwC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Cần Thơ – TP. Cần Thơ (VVCT/VCA)', status: true},
+  { id: 9, name: 'ABC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Phú Quốc – Kiên Giang (VVPQ/PQC)', status: false},
+  { id: 10, name: 'AcC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'Sân bay Côn Đảo', status: false},
+  { id: 11, name: 'ABb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'Sân bay Pleiku – Gia Lai', status: true},
+  { id: 12, name: 'AwC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay Liên Khương – Đà Lạt', status: true},
 
   ];
 // End sample JSON
@@ -87,18 +109,18 @@ const Customers = () => {
       // console.log(newCustomers)
     }
 
-    // const handleChangePage = (event, newPage) => {
-    //   setPage(newPage);
-    // };
+    const handleChangePage = (event, newPage) => {
+      setPage(newPage);
+    };
 
-    // const handleChangeRowsPerPage = (event) => {
-    //   setRowsPerPage(parseInt(event.target.value, 10));
-    //   setPage(0);
-    // };
+    const handleChangeRowsPerPage = (event) => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
+    };
 
-    // const handleChangeDense = (event) => {
-    //   setDense(event.target.checked);
-    // };
+    const handleChangeDense = (event) => {
+      setDense(event.target.checked);
+    };
 
     //render Group Buttons for Component 
     const _renderGroupButtons = () => {
@@ -191,7 +213,7 @@ const Customers = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        {/* <TablePagination
+        <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={apiCustomers.length}
@@ -199,12 +221,12 @@ const Customers = () => {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
-        /> */}
+        />
       </Paper>
-      {/* <FormControlLabel
+      <FormControlLabel
       control={<Switch checked={dense} onChange={handleChangeDense} />}
       label="Dense padding"
-    /> */}
+    />
     </div>
   )
 }

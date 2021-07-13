@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <Customers />
-      <CustomizedSnackbars />
+      {/* <CustomizedSnackbars /> */}
       {/* <BasicTextFields /> */}
     </div>
     );
