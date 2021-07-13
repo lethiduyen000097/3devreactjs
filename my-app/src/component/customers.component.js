@@ -15,7 +15,6 @@ import {
   TablePagination
  } from '@material-ui/core';
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
@@ -47,15 +46,11 @@ const apiCustomers = [
 
 const Customers = () => {
     const classes = useStyles();
-
-    // const [selected, setSelected] = React.useState([]);
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [dense, setDense] = React.useState(false);
-    const [selected, setSelected] = React.useState([]);
-
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(15);
+    const [dense, setDense] = useState(false);
+    const [selected, setSelected] = useState([]);
     const [customers, setCustomers] = useState([]);
-    // const [newCustomers, setStatusCustomers] = useState([])
 
     useEffect(function effectFunction(){
       console.log(apiCustomers)
@@ -66,13 +61,10 @@ const Customers = () => {
     }, []) 
 
     const handleCheckBoxClick = (row) => {
-      // console.log(row)
       let newCustomers = customers.map((el, index)=>(
         el.id !== row.id? el: {...el, status: !el.status}
       ))
       setCustomers(newCustomers)
-      console.log(customers)
-      console.log(newCustomers)
     }
     const handleBtnDisableClick = () => {
       console.log(selected)
@@ -95,19 +87,8 @@ const Customers = () => {
         );
       }
       setSelected(newSelected);
-      console.log('nono', newSelected)
     };
-    
-    const EnableClick = (row) => {
-      console.log(customers)
-     let newStatusCustomers = customers.map((el, index)=>(
-       el.id !== row.id? el: {...el}
-      
-     ))
-    //  setStatusCustomers(newStatusCustomers)
-      
-      // console.log(newCustomers)
-    }
+
 
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
@@ -130,8 +111,6 @@ const Customers = () => {
         <Button 
           variant="contained" 
           color="primary" 
-          onClick={EnableClick}
-          // onClick={(event) => handleClickEnable(event, apiCustomers.name)}
         >
           Enable
         </Button>
@@ -139,7 +118,6 @@ const Customers = () => {
         variant="contained"
         
         onClick={handleBtnDisableClick}
-        // onClick={(event) => handleClickDisable(event, apiCustomers.name)}
         >
           Disable
         </Button>
@@ -197,7 +175,6 @@ const Customers = () => {
                     <TableCell padding="checkbox" align="center" width="5%">
                       <Checkbox
                         checked={row.status}
-                        // checked={isItemSelected}
                         onClick={handleCheckBoxClick.bind(this, row)}
                         inputProps={{ 'aria-labelledby': labelId }}
                       />
