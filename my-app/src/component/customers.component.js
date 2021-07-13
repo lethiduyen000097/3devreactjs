@@ -70,6 +70,21 @@ const Customers = () => {
       console.log(selected)
     }
 
+    // const handleRequestSort = (event, property) => {
+    //   const isAsc = orderBy === property && order === 'asc';
+    //   setOrder(isAsc ? 'desc' : 'asc');
+    //   setOrderBy(property);
+    // };
+  
+    // const handleSelectAllClick = (event) => {
+    //   if (event.target.checked) {
+    //     const newSelecteds = rows.map((n) => n.name);
+    //     setSelected(newSelecteds);
+    //     return;
+    //   }
+    //   setSelected([]);
+    // };
+
     const handleClick = (event, id) => {
       const selectedIndex = selected.indexOf(id);
       let newSelected = [];
@@ -137,7 +152,7 @@ const Customers = () => {
         <TableContainer component={Paper}>
           <Table 
             className={classes.table} 
-            aria-label="simple table"
+            // aria-label="simple table"
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
           >
@@ -161,7 +176,7 @@ const Customers = () => {
                     hover
                     onClick={(event) => handleClick(event, row.id)}
                     role="checkbox"
-                    aria-checked={isItemSelected}
+                    // aria-checked={isItemSelected}
                     tabIndex={-1}
                     key={row.id}
                     selected={isItemSelected}
@@ -177,6 +192,7 @@ const Customers = () => {
                         checked={row.status}
                         onClick={handleCheckBoxClick.bind(this, row)}
                         inputProps={{ 'aria-labelledby': labelId }}
+
                       />
                     </TableCell>
                   </TableRow>

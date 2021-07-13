@@ -4,6 +4,8 @@ import {
     BrowserRouter as Router,
   } from "react-router-dom";
 
+
+
 const HomeBay = () => {
     return (
         <Router>
@@ -26,6 +28,10 @@ const HomeBay = () => {
                     </li>
                 </ul>
                 </nav>
+
+                <h3>Location</h3>
+               
+          
         </div>
         </Router>
     )

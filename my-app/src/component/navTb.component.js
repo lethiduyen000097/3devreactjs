@@ -79,7 +79,7 @@ const NavTabs = () => {
           variant="fullWidth"
           value={value}
           onChange={handleChange}
-          aria-label="nav tabs example"
+          // aria-label="nav tabs example"
         >
           <LinkTab label="Page One" href="/drafts" {...a11yProps(0)} />
           <LinkTab label="Page Two" href="/trash" {...a11yProps(1)} />
