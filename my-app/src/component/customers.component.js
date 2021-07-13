@@ -15,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
 
 // Sample JSON return from backend
 const apiCustomers = [
-  { id: 1, name: 'ABC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'dfdghjkl', status: false},
-  { id: 2, name: 'AcC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'sdsdsfdghjkl', status: false},
-  { id: 3, name: 'ABb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'dhjkl', status: true},
-  { id: 4, name: 'AwC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'dfdghjkl', status: true},
+  { id: 1, name: 'ABC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay Nội Bài', status: false},
+  { id: 2, name: 'AcC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'Sân bay quốc tế Cát Bi – Hải Phòng', status: false},
+  { id: 3, name: 'ABb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'Sân bay quốc tế Phú Bài – Huế (VVPB/HUI)', status: true},
+  { id: 4, name: 'AwC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Cam Ranh – Khánh Hòa (VVCR/CXR)', status: true},
 
   ];
 // End sample JSON
@@ -143,10 +143,10 @@ const Customers = () => {
           >
             <TableHead>
               <TableRow>
-                <TableCell align="center">ID</TableCell>
+                <TableCell align="center" >ID</TableCell>
                 <TableCell align="center">Name</TableCell>
                 <TableCell align="center">Shortname</TableCell>
-                <TableCell align="center">Tip code</TableCell>
+                <TableCell align="center">Tax code</TableCell>
                 <TableCell align="center">Code</TableCell>
                 <TableCell align="center">Address</TableCell>
                 <TableCell align="center">Status</TableCell>
@@ -166,13 +166,13 @@ const Customers = () => {
                     key={row.id}
                     selected={isItemSelected}
                   >
-                    <TableCell align="center">{row.id}</TableCell>
-                    <TableCell align="center">{row.name}</TableCell>
-                    <TableCell align="center">{row.short_name}</TableCell>
-                    <TableCell align="center">{row.tax_code}</TableCell>
-                    <TableCell align="center">{row.code}</TableCell>
-                    <TableCell align="center">{row.address}</TableCell>
-                    <TableCell padding="checkbox" align="center">
+                    <TableCell align="center" width="5%">{row.id}</TableCell>
+                    <TableCell align="center" width="20%">{row.name}</TableCell>
+                    <TableCell align="center" width="10%" >{row.short_name}</TableCell>
+                    <TableCell align="center" width="10%">{row.tax_code}</TableCell>
+                    <TableCell align="center" width="10%">{row.code}</TableCell>
+                    <TableCell align="center" width="40%">{row.address}</TableCell>
+                    <TableCell padding="checkbox" align="center" width="5%">
                       <Checkbox
                         checked={row.status}
                         // checked={isItemSelected}
