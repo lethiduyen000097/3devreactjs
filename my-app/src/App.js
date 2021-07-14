@@ -1,3 +1,27 @@
+// import React from "react";
+// import TableDemo from "./TableDemo";
+  
+// function App() {
+//     return (
+//         <div>
+//             {/* Header with inline css */}
+//             <h1
+//                 style={{
+//                     display: 'flex', justifyContent: 'center', padding: '15px',
+//                     border: '13px solid #b4f0b4', color: 'rgb(11, 167, 11)'
+//                 }}>
+//                 Geeks For Geeks Material UI Table
+//             </h1>
+//             {/* Table component below header */}
+//             <TableDemo />
+//         </div>
+//     )
+// }
+  
+// export default App;
+
+
+
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -7,10 +31,10 @@ import {
 } from "react-router-dom";
 
 import Customers from "./component/customers.component";
-import CreateUser from "./component/users.component";
-import HomeBay from "./component/home.component";
+// import CreateUser from "./component/users.component";
+// import HomeBay from "./component/home.component";
 // import MenuHome from "./component/menuHome.component";
-import NavTabs from "./component/navTb.component";
+// import NavTabs from "./component/navTb.component";
 
 
 
@@ -20,18 +44,18 @@ export default function App() {
       <div>
         <nav>
           <ul>
-            <li>
+            {/* <li>
               <Link to="/home">Home</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/customers">Customer</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/users">Users</Link>
             </li>
             <li>
               <Link to="/test">Test</Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
 
@@ -41,16 +65,16 @@ export default function App() {
           <Route path="/customers">
             <Customers />
           </Route>
-          <Route path="/users">
+          {/* <Route path="/users">
             <CreateUser />
           </Route>
           <Route path="/test">
             {/* <MenuHome /> */}
-            <NavTabs />
-          </Route>
-          <Route path="/">
+            {/* <NavTabs />
+          </Route> */}
+          {/* <Route path="/">
             <HomeBay />
-          </Route>
+          </Route> */} */}
           
         </Switch>
       </div>

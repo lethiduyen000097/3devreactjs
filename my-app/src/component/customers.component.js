@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 import { 
   makeStyles, 
   TableContainer, 
@@ -24,6 +27,17 @@ const useStyles = makeStyles((theme) => ({
     table: {
       minWidth: 650,
     },
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    paper: {
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
 }));
 
 // Sample JSON return from backend
@@ -32,14 +46,6 @@ const apiCustomers = [
   { id: 2, name: 'AcC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'Sân bay quốc tế Cát Bi – Hải Phòng', status: false},
   { id: 3, name: 'ABb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'Sân bay quốc tế Phú Bài – Huế (VVPB/HUI)', status: true},
   { id: 4, name: 'AwC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Cam Ranh – Khánh Hòa (VVCR/CXR)', status: true},
-  { id: 5, name: 'ABC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Đà Nẵng – TP. Đà Nẵng (VVDN/DAD)', status: false},
-  { id: 6, name: 'AcC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'Sân bay quốc tế Cam Ranh – Khánh Hòa (VVCR/CXR)', status: false},
-  { id: 7, name: 'ABb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'Sân bay quốc tế Tân Sơn Nhất – TP.HCM (VVTS/SGN)', status: true},
-  { id: 8, name: 'AwC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Cần Thơ – TP. Cần Thơ (VVCT/VCA)', status: true},
-  { id: 9, name: 'ABC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Phú Quốc – Kiên Giang (VVPQ/PQC)', status: false},
-  { id: 10, name: 'AcC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'Sân bay Côn Đảo', status: false},
-  { id: 11, name: 'ABb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'Sân bay Pleiku – Gia Lai', status: true},
-  { id: 12, name: 'AwC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay Liên Khương – Đà Lạt', status: true},
 
   ];
 // End sample JSON
@@ -70,21 +76,6 @@ const Customers = () => {
       console.log(selected)
     }
 
-    // const handleRequestSort = (event, property) => {
-    //   const isAsc = orderBy === property && order === 'asc';
-    //   setOrder(isAsc ? 'desc' : 'asc');
-    //   setOrderBy(property);
-    // };
-  
-    // const handleSelectAllClick = (event) => {
-    //   if (event.target.checked) {
-    //     const newSelecteds = rows.map((n) => n.name);
-    //     setSelected(newSelecteds);
-    //     return;
-    //   }
-    //   setSelected([]);
-    // };
-
     const handleClick = (event, id) => {
       const selectedIndex = selected.indexOf(id);
       let newSelected = [];
@@ -105,6 +96,8 @@ const Customers = () => {
     };
 
 
+
+
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
     };
@@ -117,6 +110,11 @@ const Customers = () => {
     const handleChangeDense = (event) => {
       setDense(event.target.checked);
     };
+
+
+
+
+
 
     //render Group Buttons for Component 
     const _renderGroupButtons = () => {
@@ -140,6 +138,35 @@ const Customers = () => {
     );
   }
   // End function render Group Buttons
+
+  //modal
+  // function rand() {
+  //   return Math.round(Math.random() * 20) - 10;
+  // }
+
+  // function getModalStyle() {
+  //   const top = 50 + rand();
+  //   const left = 50 + rand();
+  
+  //   return {
+  //     top: `${top}%`,
+  //     left: `${left}%`,
+  //     transform: `translate(-${top}%, -${left}%)`,
+  //   };
+  // }
+
+  // const [open, setOpen] = useState(false);
+  // const [modalStyle] = useState(getModalStyle);
+  // const handleOpen = () => {
+  //   setOpen(true);
+  //   console.log('openmodal', {body});
+  // };
+
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+
+  // end modal
 
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
@@ -174,12 +201,13 @@ const Customers = () => {
                 return (  
                   <TableRow 
                     hover
-                    onClick={(event) => handleClick(event, row.id)}
+                    // onClick={(event) => handleClick(event, row.id)}
                     role="checkbox"
-                    // aria-checked={isItemSelected}
+                    aria-checked={isItemSelected}
                     tabIndex={-1}
                     key={row.id}
                     selected={isItemSelected}
+                    onClick={handleOpen}
                   >
                     <TableCell align="center" width="5%">{row.id}</TableCell>
                     <TableCell width="15%">{row.name}</TableCell>
@@ -223,7 +251,51 @@ const Customers = () => {
     </div>
   )
 }
+
+
+// const bodya = () => {
+//   return (
+//     <>
+//     <h1>hhh</h1>
+//     </>
+//   )
+// };
+// const body = (
+//   <div 
+//   style={modalStyle} 
+//   className={classes.paper}
+//   >
+//     <h2 
+//     // id="simple-modal-title"
+//     >Text in a modal</h2>
+//     {/* <p id="simple-modal-description">
+//       Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+//     </p> */}
+//     {/* <SimpleModal /> */}
+//   </div>
+// );
   // End render Table 
+
+
+//modal
+// const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
+// end modal
+
+
+
+
+
 
   // Main Render
 return (
@@ -233,6 +305,31 @@ return (
         {_renderGroupButtons()}
         {_renderCustomerTable()}       
       </div>
+
+    
+
+      <button type="button" onClick={handleOpen}>
+        react-transition-group
+      </button>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <h2 id="transition-modal-title">Chỉnh sửa thông tin customer</h2>
+            
+          </div>
+        </Fade>
+      </Modal>
   </div>
   )
 }
