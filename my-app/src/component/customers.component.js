@@ -34,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
       backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
+      // border: '2px solid #000',
+      // boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
 }));
@@ -312,20 +312,96 @@ return (
         react-transition-group
       </button>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+        // aria-labelledby="transition-modal-title"
+        // aria-describedby="transition-modal-description"
         className={classes.modal}
         open={open}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
+        width="100%"
         BackdropProps={{
           timeout: 500,
         }}
+        
       >
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Chỉnh sửa thông tin customer</h2>
+            
+
+            <div className="row">
+              <div className="col-4">
+              ID:
+              </div>
+              <div className="col-8">
+                <input />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-4">
+              ID:
+              </div>
+              <div className="col-8">
+                <input />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-4">
+              Name:
+              </div>
+              <div className="col-8">
+                <input />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-4">
+              Short-name:
+              </div>
+              <div className="col-8">
+                <input />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-4">
+              Tax-code:
+              </div>
+              <div className="col-8">
+                <input />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-4">
+              Code:
+              </div>
+              <div className="col-8">
+                <input />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-4">
+              Address:
+              </div>
+              <div className="col-8">
+                <input />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-4">
+              Status:
+              </div>
+              <div className="col-8">
+                <input />
+              </div>
+            </div>
+
             
           </div>
         </Fade>
