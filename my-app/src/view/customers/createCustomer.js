@@ -22,6 +22,7 @@ import {
     Route,
     Link
   } from "react-router-dom";
+import EditCustomers from './editCustomer';
 
 const Customers = () => {
   const [id, setId] = useState('')
@@ -141,6 +142,7 @@ const Customers = () => {
   </Button> */}
   
   <Link to="/list-customer">List Customer</Link>
+  <Link to="/edit-customer">Edit Customer</Link>
   
   
 
@@ -149,6 +151,9 @@ const Customers = () => {
   <Switch>
     <Route path="/list-customer">
       <ListCustomers />
+    </Route>
+    <Route path="/edit-customer">
+      <EditCustomers />
     </Route>
 
   </Switch>
