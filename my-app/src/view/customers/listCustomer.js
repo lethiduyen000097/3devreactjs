@@ -1,20 +1,4 @@
-// import React from 'react';
-
-// const ListCustomers = () => {
-//     return (
-//         <>
-//         <h3>List Customer</h3>
-//         </>
-//     )
-// }
-
-// export default ListCustomers;
-
 import React, { useState, useEffect } from 'react';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import SaveIcon from '@material-ui/icons/Save';
 import { 
   makeStyles, 
   TableContainer, 
@@ -28,8 +12,12 @@ import {
   TableCell, 
   Paper, 
   Button,
-  TablePagination
+  TablePagination,
+  Modal,
+  Backdrop,
+  Fade
  } from '@material-ui/core';
+ import SaveIcon from '@material-ui/icons/Save';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,87 +35,95 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
       backgroundColor: theme.palette.background.paper,
-      // border: '2px solid #000',
-      // boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
 }));
 
-// Sample JSON return from backend
-const apiCustomers = [
-  { id: 1, name: 'ABC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Nội Bài – TP. Hà Nội (VVNB/HAN)', status: false},
-  { id: 2, name: 'AcC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'Sân bay quốc tế Cát Bi – Hải Phòng', status: false},
-  { id: 3, name: 'ABb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'Sân bay quốc tế Phú Bài – Huế (VVPB/HUI)', status: true},
-  { id: 4, name: 'AwC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Cam Ranh – Khánh Hòa (VVCR/CXR)', status: true},
 
-  ];
 // End sample JSON
 
 const ListCustomers = () => {
-    const classes = useStyles();
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [dense, setDense] = useState(false);
-    const [selected, setSelected] = useState([]);
-    const [customers, setCustomers] = useState([]);
+  const classes = useStyles();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [dense, setDense] = useState(false);
+  const [selected, setSelected] = useState([]);
+  const [customers, setCustomers] = useState([]);
 
-    useEffect(function effectFunction(){
-      console.log(apiCustomers)
-      if (apiCustomers) {
-        setCustomers(apiCustomers)
-      }
-      console.log('State Customer', customers)
-    }, []) 
-
-    const handleCheckBoxClick = (row) => {
-      let newCustomers = customers.map((el, index)=>(
-        el.id !== row.id? el: {...el, status: !el.status}
-      ))
-      setCustomers(newCustomers)
+  useEffect(function effectFunction(){
+    console.log(apiCustomers)
+    if (apiCustomers) {
+      setCustomers(apiCustomers)
     }
-    const handleBtnDisableClick = () => {
-      console.log(selected)
-    }
+    console.log('State Customer', customers)
+  }, []) 
 
-    // const handleClick = (event, id) => {
-    //   const selectedIndex = selected.indexOf(id);
-    //   let newSelected = [];
+  const handleCheckBoxClick = (row) => {
+    let newCustomers = customers.map((el, index)=>(
+      el.id !== row.id? el: {...el, status: !el.status}
+    ))
+    setCustomers(newCustomers)
+  }
+  const handleBtnDisableClick = () => {
+    console.log(selected)
+  }
+
+ 
+
+  // const handleClick = (event, id) => {
+  //   const selectedIndex = selected.indexOf(id);
+  //   let newSelected = [];
+
+  //   if (selectedIndex === -1) {
+  //     newSelected = newSelected.concat(selected, id);
+  //   } else if (selectedIndex === 0) {
+  //     newSelected = newSelected.concat(selected.slice(1));
+  //   } else if (selectedIndex === selected.length - 1) {
+  //     newSelected = newSelected.concat(selected.slice(0, -1));
+  //   } else if (selectedIndex > 0) {
+  //     newSelected = newSelected.concat(
+  //       selected.slice(0, selectedIndex),
+  //       selected.slice(selectedIndex + 1),
+  //     );
+  //   }
+  //   setSelected(newSelected);
+  // };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const handleChangeDense = (event) => {
+    setDense(event.target.checked);
+  };
+
+    //modal
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   
-    //   if (selectedIndex === -1) {
-    //     newSelected = newSelected.concat(selected, id);
-    //   } else if (selectedIndex === 0) {
-    //     newSelected = newSelected.concat(selected.slice(1));
-    //   } else if (selectedIndex === selected.length - 1) {
-    //     newSelected = newSelected.concat(selected.slice(0, -1));
-    //   } else if (selectedIndex > 0) {
-    //     newSelected = newSelected.concat(
-    //       selected.slice(0, selectedIndex),
-    //       selected.slice(selectedIndex + 1),
-    //     );
-    //   }
-    //   setSelected(newSelected);
-    // };
 
+  // Sample JSON return from backend
+  const apiCustomers = [
+    { id: 1, name: 'ABC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Nội Bài – TP. Hà Nội (VVNB/HAN)', status: false},
+    { id: 2, name: 'AcC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'Sân bay quốc tế Cát Bi – Hải Phòng', status: false},
+    { id: 3, name: 'ABb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'Sân bay quốc tế Phú Bài – Huế (VVPB/HUI)', status: true},
+    { id: 4, name: 'AwC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Cam Ranh – Khánh Hòa (VVCR/CXR)', status: true},
 
-
-
-    const handleChangePage = (event, newPage) => {
-      setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(parseInt(event.target.value, 10));
-      setPage(0);
-    };
-
-    const handleChangeDense = (event) => {
-      setDense(event.target.checked);
-    };
-
-
-
-
-
+    ];
+    const isSelected = (name) => selected.indexOf(name) !== -1;
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, apiCustomers.length - page * rowsPerPage);
 
     //render Group Buttons for Component 
     const _renderGroupButtons = () => {
@@ -141,9 +137,8 @@ const ListCustomers = () => {
           Enable
         </Button>
         <Button 
-        variant="contained"
-        
-        onClick={handleBtnDisableClick}
+          variant="contained"
+          onClick={handleBtnDisableClick}
         >
           Disable
         </Button>
@@ -151,10 +146,7 @@ const ListCustomers = () => {
     );
   }
 
-
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, apiCustomers.length - page * rowsPerPage);
+  
   // render Table to display invoices
   const _renderCustomerTable = () => {
     return (
@@ -185,7 +177,6 @@ const ListCustomers = () => {
                 return (  
                   <TableRow 
                     hover
-                    // onClick={(event) => handleClick(event, row.id)}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
@@ -210,9 +201,9 @@ const ListCustomers = () => {
                 );       
               })}
               {emptyRows > 0 && (
-                    <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                      <TableCell colSpan={7} />
-                    </TableRow>
+                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                  <TableCell colSpan={7} />
+                </TableRow>
               )}
             </TableBody>
           </Table>
@@ -234,25 +225,6 @@ const ListCustomers = () => {
     </div>
   )
 }
-
-
-
-
-//modal
-// const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-
-// end modal
-
   // Main Render
 return (
   <div>
@@ -263,8 +235,6 @@ return (
       </div>
 
       <Modal
-        // aria-labelledby="transition-modal-title"
-        // aria-describedby="transition-modal-description"
         className={classes.modal}
         open={open}
         onClose={handleClose}
@@ -274,7 +244,6 @@ return (
         BackdropProps={{
           timeout: 500,
         }}
-        
       >
         <Fade in={open}>
           <div className={classes.paper}>
@@ -345,32 +314,20 @@ return (
 
             <div className="row">
               <div className="col-12">
-              <Button 
-                // variant="contained" 
-                // color="primary" 
-              >
+              <Button>
                 Cancel
               </Button>
-              {/* <Button 
-                // variant="contained" 
-                color="primary" 
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                className={classes.button}
+                startIcon={<SaveIcon />}
               >
-                Lưu
-              </Button> */}
-
-<Button
-        variant="contained"
-        color="primary"
-        size="small"
-        className={classes.button}
-        startIcon={<SaveIcon />}
-      >
-        Save
-      </Button>
+                Save
+              </Button>
               </div>
             </div>
-
-            
           </div>
         </Fade>
       </Modal>
