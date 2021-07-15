@@ -89,24 +89,24 @@ const ListCustomers = () => {
       console.log(selected)
     }
 
-    const handleClick = (event, id) => {
-      const selectedIndex = selected.indexOf(id);
-      let newSelected = [];
+    // const handleClick = (event, id) => {
+    //   const selectedIndex = selected.indexOf(id);
+    //   let newSelected = [];
   
-      if (selectedIndex === -1) {
-        newSelected = newSelected.concat(selected, id);
-      } else if (selectedIndex === 0) {
-        newSelected = newSelected.concat(selected.slice(1));
-      } else if (selectedIndex === selected.length - 1) {
-        newSelected = newSelected.concat(selected.slice(0, -1));
-      } else if (selectedIndex > 0) {
-        newSelected = newSelected.concat(
-          selected.slice(0, selectedIndex),
-          selected.slice(selectedIndex + 1),
-        );
-      }
-      setSelected(newSelected);
-    };
+    //   if (selectedIndex === -1) {
+    //     newSelected = newSelected.concat(selected, id);
+    //   } else if (selectedIndex === 0) {
+    //     newSelected = newSelected.concat(selected.slice(1));
+    //   } else if (selectedIndex === selected.length - 1) {
+    //     newSelected = newSelected.concat(selected.slice(0, -1));
+    //   } else if (selectedIndex > 0) {
+    //     newSelected = newSelected.concat(
+    //       selected.slice(0, selectedIndex),
+    //       selected.slice(selectedIndex + 1),
+    //     );
+    //   }
+    //   setSelected(newSelected);
+    // };
 
 
 
@@ -261,9 +261,7 @@ return (
         {_renderGroupButtons()}
         {_renderCustomerTable()}       
       </div>
-      <button type="button" onClick={handleOpen}>
-        react-transition-group
-      </button>
+
       <Modal
         // aria-labelledby="transition-modal-title"
         // aria-describedby="transition-modal-description"
