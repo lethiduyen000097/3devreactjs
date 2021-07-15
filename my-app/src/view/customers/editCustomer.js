@@ -5,7 +5,8 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
-import { Button } from '@material-ui/core';
+import { Button, Modal, Backdrop, Fade  } from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
 
 const EditCustomers = () => {
   const useStyles = makeStyles((theme) => ({
@@ -17,9 +18,9 @@ const EditCustomers = () => {
     },
   }));
   const classes = useStyles()
-  const [editCustomer, setEditCustomer] = useState([{ id: '', name: '', shortName: '', taxCode: '', code: '',address: '',status: '', }])
+  const [editCustomer, setEditCustomer] = useState([{ id: '', name: '', short_name: '', tax_code: '', code: '',address: '',status: '', }])
   const location = useLocation()
-  
+
   useEffect(() => {
     console.log('is it here?', location.state)
     if (location.state) {
@@ -27,17 +28,27 @@ const EditCustomers = () => {
     }
   }, [location])
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleId = (e) => {
     setEditCustomer({ ...editCustomer, id: e.target.value })
   }
   const handleName = (e) => {
     setEditCustomer({ ...editCustomer, name: e.target.value })
   }
-  const handleShortName = (e) => {
-    setEditCustomer({ ...editCustomer, shortName: e.target.value })
+  const handleShort = (e) => {
+    setEditCustomer({ ...editCustomer, short_name: e.target.value })
   }
-  const handleTaxCode = (e) => {
-    setEditCustomer({ ...editCustomer, taxCode: e.target.value })
+  const handleTax = (e) => {
+    setEditCustomer({ ...editCustomer, tax_code: e.target.value })
   }
   const handleCode = (e) => {
     setEditCustomer({ ...editCustomer, code: e.target.value })
@@ -57,7 +68,7 @@ const EditCustomers = () => {
     <form className={classes.root} noValidate autoComplete="off">
       <div>
         <div>
-          <h1>EDIT USER PAGE</h1>
+          <h1>EDIT USERR PAGE</h1>
           <TextField
             id="id-customer"
             label="ID"
@@ -70,18 +81,19 @@ const EditCustomers = () => {
             onChange={handleName}
             value={editCustomer.name}
           />
+          
           <TextField
-            id="shortName-customer"
+            id="short-customer"
             label="Short Name"
-            onChange={handleShortName}
-            value={editCustomer.shortName}
+            onChange={handleShort}
+            value={editCustomer.short_name}
           />
 
           <TextField
-            id="taxCode-customer"
+            id="tax-customer"
             label="Tax Code"
-            onChange={handleTaxCode}
-            value={editCustomer.taxCode}
+            onChange={handleTax}
+            value={editCustomer.tax_code}
           />
 
           <TextField
@@ -104,8 +116,130 @@ const EditCustomers = () => {
           />
         </div>
         <Button color='primary' variant='outlined' onClick={handleClick}>UPDATE</Button>
+
+        {/* <Modal
+  open={open}
+  onClose={handleClose}
+  aria-labelledby="simple-modal-title"
+  aria-describedby="simple-modal-description"
+>
+  cccc
+</Modal> */}
       </div>
     </form>
+    // <Modal
+    //   className={classes.modal}
+    //   open={open}
+    //   onClose={handleClose}
+    //   closeAfterTransition
+    //   BackdropComponent={Backdrop}
+    //   width="100%"
+    //   BackdropProps={{
+    //     timeout: 500,
+    //   }}
+    // >
+    //   <Fade in={open}>
+    //     <div className={classes.paper}>
+    //       <h2 id="transition-modal-title">EDIT INFORMATION CUSTOMER </h2>
+
+    //       <div className="row">
+    //         <div className="col-12">
+    //           <TextField
+    //             id="id-customer"
+    //             label="ID"
+    //             onChange={handleId}
+    //             value={editCustomer.id}
+    //           />
+    //         </div>
+    //       </div>
+
+    //       <div className="row">
+    //         <div className="col-12">
+    //           <TextField
+    //             id="name-customer"
+    //             label="Name"
+    //             onChange={handleName}
+    //             value={editCustomer.name}
+    //           />
+    //         </div>
+    //       </div>
+
+    //       <div className="row">
+    //         <div className="col-12">
+    //           <TextField
+    //             id="shortName-customer"
+    //             label="Short Name"
+    //             onChange={handleShortName}
+    //             value={editCustomer.shortName}
+    //           />
+    //         </div>
+    //       </div>
+
+    //       <div className="row">
+    //         <div className="col-12">
+    //           <TextField
+    //             id="taxCode-customer"
+    //             label="Tax Code"
+    //             onChange={handleTaxCode}
+    //             value={editCustomer.taxCode}
+    //           />
+    //         </div>
+    //       </div>
+
+    //       <div className="row">
+    //         <div className="col-12">
+    //           <TextField
+    //             id="code-customer"
+    //             label="Code"
+    //             onChange={handleCode}
+    //             value={editCustomer.code}
+    //           />
+    //         </div>
+    //       </div>
+
+    //       <div className="row">
+    //         <div className="col-12">
+    //           <TextField
+    //             id="address-customer"
+    //             label="Address"
+    //             onChange={handleAddress}
+    //             value={editCustomer.address}
+    //           />
+    //         </div>
+    //       </div>
+
+    //       <div className="row">
+    //         <div className="col-12">
+    //           <TextField
+    //             id="status-customer"
+    //             label="Status"
+    //             onChange={handleStatus}
+    //             value={editCustomer.status}
+    //           />
+    //         </div>
+    //       </div>
+
+    //       <Button color='primary' variant='outlined' onClick={handleClick}>UPDATE</Button>
+
+    //       <div className="row">
+    //         <div className="col-12">
+    //         <Button>
+    //           Cancel
+    //         </Button>
+    //         <Button
+    //           variant="contained"
+    //           color="primary"
+    //           size="small"
+    //           className={classes.button}
+    //           startIcon={<SaveIcon />}
+    //         >
+    //           Save
+    //         </Button>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </Fade>
+    // </Modal>
   )
 }
 

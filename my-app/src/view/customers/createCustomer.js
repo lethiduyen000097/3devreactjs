@@ -95,6 +95,7 @@ const Customers = () => {
         label="Status"
         onChange = {handleStatus}
       />
+      
       <p>User Details:</p>
       <p>ID:   {id}</p>
       <p>Name:   {name}</p>

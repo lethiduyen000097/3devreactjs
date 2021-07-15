@@ -15,8 +15,11 @@ import {
   TablePagination,
   Modal,
   Backdrop,
-  Fade
+  Fade,
+  TextField
  } from '@material-ui/core';
+ import { useLocation } from 'react-router';
+ import { useHistory } from "react-router-dom";
  import SaveIcon from '@material-ui/icons/Save';
 
 const useStyles = makeStyles((theme) => ({
@@ -112,12 +115,23 @@ const ListCustomers = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const history = useHistory();
+
+
+  const handleEditRoute = (row) => {
+    
+    history.push({
+      pathname: '/edit-customer',
+      state: row,
+    });
+  }
   
 
   // Sample JSON return from backend
   const apiCustomers = [
     { id: 1, name: 'ABC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Nội Bài – TP. Hà Nội (VVNB/HAN)', status: false},
-    { id: 2, name: 'AcC', short_name: 'ADFD', tax_code: 23456, code: 'dfsg', address: 'Sân bay quốc tế Cát Bi – Hải Phòng', status: false},
+    { id: 2, name: 'AcC', short_name: 'AcC', tax_code: 13457, code: 'dfsg', address: 'Sân bay quốc tế Cát Bi – Hải Phòng', status: false},
     { id: 3, name: 'ABb', short_name: 'ADFD', tax_code: 12356, code: 'dfsg', address: 'Sân bay quốc tế Phú Bài – Huế (VVPB/HUI)', status: true},
     { id: 4, name: 'AwC', short_name: 'ADFD', tax_code: 13456, code: 'dfsg', address: 'Sân bay quốc tế Cam Ranh – Khánh Hòa (VVCR/CXR)', status: true},
 
@@ -182,7 +196,8 @@ const ListCustomers = () => {
                     tabIndex={-1}
                     key={row.id}
                     selected={isItemSelected}
-                    onClick={handleOpen}
+                    // onClick={handleOpen}
+                    onClick={handleEditRoute.bind(this, row)}
                   >
                     <TableCell align="center" width="5%">{row.id}</TableCell>
                     <TableCell width="15%">{row.name}</TableCell>
@@ -225,112 +240,170 @@ const ListCustomers = () => {
     </div>
   )
 }
+
+const _modalEditCustomer = () => {
+  const [editCustomer, setEditCustomer] = useState([{ id: '', name: '', shortName: '', taxCode: '', code: '',address: '',status: '', }])
+  const location = useLocation()
+  
+  useEffect(() => {
+    console.log('is it here?', location.state)
+    if (location.state) {
+        setEditCustomer(location.state)
+    }
+  }, [location])
+
+  const handleId = (e) => {
+    setEditCustomer({ ...editCustomer, id: e.target.value })
+  }
+  const handleName = (e) => {
+    setEditCustomer({ ...editCustomer, name: e.target.value })
+  }
+  const handleShortName = (e) => {
+    setEditCustomer({ ...editCustomer, shortName: e.target.value })
+  }
+  const handleTaxCode = (e) => {
+    setEditCustomer({ ...editCustomer, taxCode: e.target.value })
+  }
+  const handleCode = (e) => {
+    setEditCustomer({ ...editCustomer, code: e.target.value })
+  }
+  const handleAddress = (e) => {
+    setEditCustomer({ ...editCustomer, address: e.target.value })
+  }
+  const handleStatus = (e) => {
+    setEditCustomer({ ...editCustomer, status: e.target.value })
+  }
+
+  const handleClick = () => {
+    console.log(editCustomer)
+  }
+  return(
+   <Modal
+      className={classes.modal}
+      open={open}
+      onClose={handleClose}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      width="100%"
+      BackdropProps={{
+        timeout: 500,
+      }}
+    >
+      <Fade in={open}>
+        <div className={classes.paper}>
+          <h2 id="transition-modal-title">EDIT INFORMATION CUSTOMER </h2>
+
+          <div className="row">
+            <div className="col-12">
+              <TextField
+                id="id-customer"
+                label="ID"
+                onChange={handleId}
+                value={editCustomer.id}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <TextField
+                id="name-customer"
+                label="Name"
+                onChange={handleName}
+                value={editCustomer.name}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <TextField
+                id="shortName-customer"
+                label="Short Name"
+                onChange={handleShortName}
+                value={editCustomer.shortName}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <TextField
+                id="taxCode-customer"
+                label="Tax Code"
+                onChange={handleTaxCode}
+                value={editCustomer.taxCode}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <TextField
+                id="code-customer"
+                label="Code"
+                onChange={handleCode}
+                value={editCustomer.code}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <TextField
+                id="address-customer"
+                label="Address"
+                onChange={handleAddress}
+                value={editCustomer.address}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <TextField
+                id="status-customer"
+                label="Status"
+                onChange={handleStatus}
+                value={editCustomer.status}
+              />
+            </div>
+          </div>
+
+          <Button color='primary' variant='outlined' onClick={handleClick}>UPDATE</Button>
+
+          <div className="row">
+            <div className="col-12">
+            <Button>
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              className={classes.button}
+              startIcon={<SaveIcon />}
+            >
+              Save
+            </Button>
+            </div>
+          </div>
+        </div>
+      </Fade>
+    </Modal>
+  )
+}
+
   // Main Render
 return (
   <div>
       <h5>Customer table</h5>
       <div style={{ height: 400, width: '100%' }}>
         {_renderGroupButtons()}
-        {_renderCustomerTable()}       
+        {_modalEditCustomer()} 
+        {_renderCustomerTable()}    
+          
       </div>
-
-      <Modal
-        className={classes.modal}
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        width="100%"
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          <div className={classes.paper}>
-            <h2 id="transition-modal-title">Chỉnh sửa thông tin customer Name ABC</h2>
-
-            <div className="row">
-              <div className="col-4">
-              ID:
-              </div>
-              <div className="col-8">
-                <input />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-4">
-              Name:
-              </div>
-              <div className="col-8">
-                <input />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-4">
-              Short-name:
-              </div>
-              <div className="col-8">
-                <input />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-4">
-              Tax-code:
-              </div>
-              <div className="col-8">
-                <input />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-4">
-              Code:
-              </div>
-              <div className="col-8">
-                <input />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-4">
-              Address:
-              </div>
-              <div className="col-8">
-                <input />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-4">
-              Status:
-              </div>
-              <div className="col-8">
-                <input />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-12">
-              <Button>
-                Cancel
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                className={classes.button}
-                startIcon={<SaveIcon />}
-              >
-                Save
-              </Button>
-              </div>
-            </div>
-          </div>
-        </Fade>
-      </Modal>
   </div>
   )
 }

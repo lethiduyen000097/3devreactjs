@@ -68,6 +68,7 @@ import {
   Link
 } from "react-router-dom";
 import Customers from "./view/customers/createCustomer";
+import EditCustomers from "./view/customers/editCustomer";
 import Users from "./view/user/createUser";
 
 export default function App() {
@@ -89,6 +90,7 @@ export default function App() {
           <Route path="/users">
             <Users />
           </Route>
+          <Route path='/edit-customer' component={EditCustomers} />
         </Switch>
       </div>
     </Router>
