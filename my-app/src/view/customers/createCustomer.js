@@ -13,6 +13,15 @@
 import { TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
+// import Button from '@material-ui/core/Button';
+import ListCustomers from './listCustomer';
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 
 const Customers = () => {
   const [id, setId] = useState('')
@@ -61,6 +70,11 @@ const Customers = () => {
   const handleStatus = (e) => {
     setStatus(e.target.value)
   }
+
+//   const handelClickBtnLC = () => {
+//     console.log("dd");
+//   }
+
 
   return (
   <form className={classes.root} noValidate autoComplete="off">
@@ -113,8 +127,39 @@ const Customers = () => {
   <p>Address:   {address}</p>
   <p>Status:   {status}</p>
 
+  
+
+  <Router>
+<div>
+{/* <Button 
+    variant="contained" 
+    color="primary"
+    // onClick = {ListCustomers} 
+    onCLick={handelClickBtnLC}
+  >
+    List Customer
+  </Button> */}
+  
+  <Link to="/list-customer">List Customer</Link>
+  
+  
+
+  {/* A <Switch> looks through its children <Route>s and
+      renders the first one that matches the current URL. */}
+  <Switch>
+    <Route path="/list-customer">
+      <ListCustomers />
+    </Route>
+
+  </Switch>
+</div>
+</Router>
+  
+
   </div>
   </form>
+
+
   )  
 };
 

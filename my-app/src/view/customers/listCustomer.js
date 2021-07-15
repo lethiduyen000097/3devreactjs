@@ -1,3 +1,15 @@
+// import React from 'react';
+
+// const ListCustomers = () => {
+//     return (
+//         <>
+//         <h3>List Customer</h3>
+//         </>
+//     )
+// }
+
+// export default ListCustomers;
+
 import React, { useState, useEffect } from 'react';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -51,7 +63,7 @@ const apiCustomers = [
   ];
 // End sample JSON
 
-const Customers = () => {
+const ListCustomers = () => {
     const classes = useStyles();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -192,7 +204,6 @@ const Customers = () => {
                         checked={row.status}
                         onClick={handleCheckBoxClick.bind(this, row)}
                         inputProps={{ 'aria-labelledby': labelId }}
-
                       />
                     </TableCell>
                   </TableRow>
@@ -242,11 +253,6 @@ const Customers = () => {
 
 // end modal
 
-
-
-
-
-
   // Main Render
 return (
   <div>
@@ -255,9 +261,6 @@ return (
         {_renderGroupButtons()}
         {_renderCustomerTable()}       
       </div>
-
-    
-
       <button type="button" onClick={handleOpen}>
         react-transition-group
       </button>
@@ -377,4 +380,4 @@ return (
   )
 }
 
-export default Customers;
+export default ListCustomers;
