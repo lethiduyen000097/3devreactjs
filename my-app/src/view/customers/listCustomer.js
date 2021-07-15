@@ -197,14 +197,33 @@ const ListCustomers = () => {
                     key={row.id}
                     selected={isItemSelected}
                     // onClick={handleOpen}
-                    onClick={handleEditRoute.bind(this, row)}
+                    // onClick={handleEditRoute.bind(this, row)}
                   >
-                    <TableCell align="center" width="5%">{row.id}</TableCell>
-                    <TableCell width="15%">{row.name}</TableCell>
-                    <TableCell width="10%" >{row.short_name}</TableCell>
-                    <TableCell align="center" width="10%">{row.tax_code}</TableCell>
-                    <TableCell align="center" width="10%">{row.code}</TableCell>
-                    <TableCell width="40%">{row.address}</TableCell>
+                    <TableCell 
+                    // onClick={handleEditRoute()} 
+                      onClick={handleEditRoute.bind(this, row)}
+                      align="center" width="5%">{row.id} 
+                    </TableCell>
+                    <TableCell
+                      onClick={handleEditRoute.bind(this, row)}
+                      width="15%">{row.name}
+                    </TableCell>
+                    <TableCell
+                      onClick={handleEditRoute.bind(this, row)}
+                      width="10%" >{row.short_name}
+                    </TableCell>
+                    <TableCell
+                      onClick={handleEditRoute.bind(this, row)}
+                      align="center" width="10%">{row.tax_code}
+                    </TableCell>
+                    <TableCell
+                      onClick={handleEditRoute.bind(this, row)}
+                      align="center" width="10%">{row.code}
+                    </TableCell>
+                    <TableCell
+                      onClick={handleEditRoute.bind(this, row)}
+                      width="40%">{row.address}
+                    </TableCell>
                     <TableCell padding="checkbox" align="center" width="10%">
                       <Checkbox
                         checked={row.status}

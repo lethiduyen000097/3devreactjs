@@ -44,10 +44,10 @@ const EditCustomers = () => {
   const handleName = (e) => {
     setEditCustomer({ ...editCustomer, name: e.target.value })
   }
-  const handleShort = (e) => {
+  const handleShortName = (e) => {
     setEditCustomer({ ...editCustomer, short_name: e.target.value })
   }
-  const handleTax = (e) => {
+  const handleTaxCode = (e) => {
     setEditCustomer({ ...editCustomer, tax_code: e.target.value })
   }
   const handleCode = (e) => {
@@ -85,14 +85,14 @@ const EditCustomers = () => {
           <TextField
             id="short-customer"
             label="Short Name"
-            onChange={handleShort}
+            onChange={handleShortName}
             value={editCustomer.short_name}
           />
 
           <TextField
             id="tax-customer"
             label="Tax Code"
-            onChange={handleTax}
+            onChange={handleTaxCode}
             value={editCustomer.tax_code}
           />
 
@@ -117,14 +117,6 @@ const EditCustomers = () => {
         </div>
         <Button color='primary' variant='outlined' onClick={handleClick}>UPDATE</Button>
 
-        {/* <Modal
-  open={open}
-  onClose={handleClose}
-  aria-labelledby="simple-modal-title"
-  aria-describedby="simple-modal-description"
->
-  cccc
-</Modal> */}
       </div>
     </form>
     // <Modal
